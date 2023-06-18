@@ -1,0 +1,6 @@
+@@@@@   How to fix USB2Serial dev on Linux.?  @@@@@
+
+sudo nano /etc/udev/rules.d/99-usb-serial.rules
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", KERNELS=="BUS_NUMBER:*", KERNEL=="DEVICE_NUMBER:*", SYMLINK+="ttyUSB9"
+sudo udevadm control --reload-rules
+
