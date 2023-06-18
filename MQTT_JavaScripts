@@ -1,0 +1,24 @@
+if (real_val >= 0) {
+using Special.FLibSYS;
+cli="hostname";
+upTime=sysCall("date");
+host=sysCall(cli);
+
+
+host = host.substring(0,(host.length-1));
+//if(Host.length > 10) Host = Host.substring(0,10);
+
+pub="'"+user+"/"+host+"/"+topic+"'";
+//real_val=regin*mult;
+
+
+messages=real_val.toFixed(2);
+if (f_mqtt==1) {
+    mqtt="mosquitto_pub -h "+server+ " -p " +port+ " -u " +user+" -P "+passwd+" -t "+pub+" -m "+"'" +messages+" "+unit+"'";
+    test=sysCall(mqtt);
+    messPut("Example",0,"Example: "+test);
+   // mqtt="mosquitto_pub -h mqttip.osszone.com -p 1883 -u ossuser1 -P osspwd1 -t"+" "+Pub+" "+"-m"+" '" +messages+"'";
+   // test=sysCall(mqtt);
+   // messPut("Example",0,"Example: "+test);
+}
+}
