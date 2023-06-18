@@ -7,5 +7,7 @@ sudo udevadm control --reload-rules
 sudo nano /etc/udev/rules.d/50-usb-serial.rules
 KERNEL=="ttyUSB*", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUSB5"
 sudo update-initramfs -u
-
+----------------------------------------------------
+KERNELS=="1-1.5:1.0", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUSB5"
+sudo udevadm control --reload-rules
 
