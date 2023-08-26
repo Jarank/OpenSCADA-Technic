@@ -1,0 +1,1096 @@
+[
+    {
+        "id": "2f4851b2.5c76fe",
+        "type": "group",
+        "z": "b8340591.d43bf8",
+        "name": "Toggle",
+        "style": {
+            "stroke": "#92d04f",
+            "fill": "#ffffff",
+            "label": true,
+            "label-position": "n",
+            "color": "#0070c0"
+        },
+        "nodes": [
+            "bd141079.5a45c",
+            "6ad6a4f2.bf4a5c",
+            "8d46bbf.2495248",
+            "987075c3.b4cef8",
+            "ef747472.e9a8f8",
+            "4e08c4612488b8be"
+        ],
+        "x": 34,
+        "y": 159,
+        "w": 552,
+        "h": 162
+    },
+    {
+        "id": "bd141079.5a45c",
+        "type": "mqtt out",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "Toggle",
+        "topic": "ossuser1/ESP82-06/cmnd/POWER1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6e117ba5.8026e4",
+        "x": 510,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6ad6a4f2.bf4a5c",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "ON",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "bd141079.5a45c",
+                "4e08c4612488b8be"
+            ]
+        ]
+    },
+    {
+        "id": "8d46bbf.2495248",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "OFF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "bd141079.5a45c",
+                "4e08c4612488b8be"
+            ]
+        ]
+    },
+    {
+        "id": "987075c3.b4cef8",
+        "type": "ui_button",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "TOGGLE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "ef747472.e9a8f8"
+            ]
+        ]
+    },
+    {
+        "id": "ef747472.e9a8f8",
+        "type": "function",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "",
+        "func": "var data = flow.get(\"SonoffL1\");\n\n\nif(data.POWER1 === true ){\n    msg.payload = false;\n}\nelse{\n    msg.payload = true;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "bd141079.5a45c",
+                "4e08c4612488b8be"
+            ]
+        ]
+    },
+    {
+        "id": "4e08c4612488b8be",
+        "type": "debug",
+        "z": "b8340591.d43bf8",
+        "g": "2f4851b2.5c76fe",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "6e117ba5.8026e4",
+        "type": "mqtt-broker",
+        "name": "mqttip.osszone.com",
+        "broker": "mqttip.osszone.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "afbc3cd5.d1188",
+        "type": "ui_group",
+        "name": "Witty L1 Strip",
+        "tab": "60d9b14b.1b2a6",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "60d9b14b.1b2a6",
+        "type": "ui_tab",
+        "name": "Witty L1",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5c56af41.e9c53",
+        "type": "group",
+        "z": "b8340591.d43bf8",
+        "name": "Colour",
+        "style": {
+            "stroke": "#0070c0",
+            "fill": "#bfdbef",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "9454a4d0.f02b88",
+            "e76443ae.b6f87",
+            "f0360f06.1d6da",
+            "a1ed19f9.dcacc8",
+            "4180f1c9.16d4d"
+        ],
+        "x": 624,
+        "y": 539,
+        "w": 562,
+        "h": 182
+    },
+    {
+        "id": "9454a4d0.f02b88",
+        "type": "mqtt out",
+        "z": "b8340591.d43bf8",
+        "g": "5c56af41.e9c53",
+        "name": "COLOR",
+        "topic": "ossuser1/ESP82-06/cmnd/HSBCOLOR",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6e117ba5.8026e4",
+        "x": 1100,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e76443ae.b6f87",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "5c56af41.e9c53",
+        "name": "blue",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "novostella/cmnd/HSBCOLOR",
+        "payload": "229,98,98",
+        "payloadType": "str",
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "9454a4d0.f02b88"
+            ]
+        ]
+    },
+    {
+        "id": "f0360f06.1d6da",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "5c56af41.e9c53",
+        "name": "red",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "novostella/cmnd/HSBCOLOR",
+        "payload": "357,97,97",
+        "payloadType": "str",
+        "x": 720,
+        "y": 620,
+        "wires": [
+            [
+                "9454a4d0.f02b88"
+            ]
+        ]
+    },
+    {
+        "id": "a1ed19f9.dcacc8",
+        "type": "ui_colour_picker",
+        "z": "b8340591.d43bf8",
+        "g": "5c56af41.e9c53",
+        "name": "",
+        "label": "",
+        "group": "afbc3cd5.d1188",
+        "format": "hsv",
+        "outformat": "object",
+        "showSwatch": true,
+        "showPicker": true,
+        "showValue": true,
+        "showHue": false,
+        "showAlpha": false,
+        "showLightness": true,
+        "square": "false",
+        "dynOutput": "false",
+        "order": 4,
+        "width": "8",
+        "height": "3",
+        "passthru": true,
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 740,
+        "y": 680,
+        "wires": [
+            [
+                "4180f1c9.16d4d"
+            ]
+        ]
+    },
+    {
+        "id": "4180f1c9.16d4d",
+        "type": "function",
+        "z": "b8340591.d43bf8",
+        "g": "5c56af41.e9c53",
+        "name": "",
+        "func": "var h = Math.round(msg.payload.h);\nvar s = msg.payload.s *100;\nvar v = msg.payload.v *100;\n\nmsg.payload = h.toString() +\",\"+s.toString()+\",\" + v.toString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 680,
+        "wires": [
+            [
+                "9454a4d0.f02b88"
+            ]
+        ]
+    },
+    {
+        "id": "82451452.3bbbc8",
+        "type": "group",
+        "z": "b8340591.d43bf8",
+        "name": "Brightness",
+        "style": {
+            "stroke": "#3f5787",
+            "fill": "#7f7f7f",
+            "label": true,
+            "label-position": "n",
+            "color": "#ffffff"
+        },
+        "nodes": [
+            "aecefa02.516568",
+            "d1eb5db1.03e1d",
+            "74074a16.d19cb4",
+            "58694bfb.b1b414",
+            "a47fd110.7f0de",
+            "37be32a3.20228e",
+            "25f2a1f2.2d7f1e",
+            "49d10ab3.2fbae4",
+            "fb6f112e.9da9c"
+        ],
+        "x": 34,
+        "y": 339,
+        "w": 552,
+        "h": 282
+    },
+    {
+        "id": "aecefa02.516568",
+        "type": "mqtt out",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "brightness",
+        "topic": "ossuser1/ESP82-06/cmnd/Dimmer",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6e117ba5.8026e4",
+        "x": 490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d1eb5db1.03e1d",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "Max",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "aecefa02.516568"
+            ]
+        ]
+    },
+    {
+        "id": "74074a16.d19cb4",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "Min",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "aecefa02.516568"
+            ]
+        ]
+    },
+    {
+        "id": "58694bfb.b1b414",
+        "type": "random",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "",
+        "low": "0",
+        "high": "100",
+        "inte": "true",
+        "property": "payload",
+        "x": 320,
+        "y": 380,
+        "wires": [
+            [
+                "aecefa02.516568"
+            ]
+        ]
+    },
+    {
+        "id": "a47fd110.7f0de",
+        "type": "inject",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "Random",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "58694bfb.b1b414"
+            ]
+        ]
+    },
+    {
+        "id": "37be32a3.20228e",
+        "type": "ui_slider",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "afbc3cd5.d1188",
+        "order": 8,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "",
+        "min": 0,
+        "max": "100",
+        "step": "5",
+        "x": 330,
+        "y": 580,
+        "wires": [
+            [
+                "aecefa02.516568",
+                "25f2a1f2.2d7f1e"
+            ]
+        ]
+    },
+    {
+        "id": "25f2a1f2.2d7f1e",
+        "type": "ui_text",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "group": "afbc3cd5.d1188",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Brightness",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 490,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "49d10ab3.2fbae4",
+        "type": "ui_button",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 7,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "Min",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "10",
+        "payloadType": "num",
+        "topic": "",
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "aecefa02.516568",
+                "37be32a3.20228e"
+            ]
+        ]
+    },
+    {
+        "id": "fb6f112e.9da9c",
+        "type": "ui_button",
+        "z": "b8340591.d43bf8",
+        "g": "82451452.3bbbc8",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 14,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "Max",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "100",
+        "payloadType": "num",
+        "topic": "",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "aecefa02.516568",
+                "37be32a3.20228e"
+            ]
+        ]
+    },
+    {
+        "id": "bcdb7390.e88bf",
+        "type": "group",
+        "z": "b8340591.d43bf8",
+        "name": "Status updates",
+        "style": {
+            "stroke": "#ff0000",
+            "fill": "#ffbfbf",
+            "label": true,
+            "label-position": "n",
+            "color": "#001f60"
+        },
+        "nodes": [
+            "aed7adc3.9d6ef",
+            "4e68e425.49f0bc",
+            "7965941a.03d08c"
+        ],
+        "x": 34,
+        "y": 39,
+        "w": 552,
+        "h": 82
+    },
+    {
+        "id": "aed7adc3.9d6ef",
+        "type": "mqtt in",
+        "z": "b8340591.d43bf8",
+        "g": "bcdb7390.e88bf",
+        "name": "Sonoff L1 Lite Status",
+        "topic": "ossuser1/ESP82-06/stat/RESULT",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "6e117ba5.8026e4",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "4e68e425.49f0bc"
+            ]
+        ]
+    },
+    {
+        "id": "4e68e425.49f0bc",
+        "type": "function",
+        "z": "b8340591.d43bf8",
+        "g": "bcdb7390.e88bf",
+        "name": "Sonoff L1 state",
+        "func": "var current = flow.get(\"SonoffL1\");\nvar data =  msg.payload;\nvar state;\n\nif(data.POWER1 === \"ON\"){\n    data.POWER1 = true;\n    msg.label = \"ON\";\n}\nif(data.POWER1 === \"OFF\"){\n    data.POWER1 = false;\n    msg.label = \"OFF\";\n}\nvar save = Object.assign(current, data);\nflow.set(\"SonoffL1\", save);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"SonoffL1\", {\"POWER\": false})",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 80,
+        "wires": [
+            [
+                "7965941a.03d08c"
+            ]
+        ]
+    },
+    {
+        "id": "7965941a.03d08c",
+        "type": "ui_text",
+        "z": "b8340591.d43bf8",
+        "g": "bcdb7390.e88bf",
+        "group": "afbc3cd5.d1188",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Status",
+        "label": "Status",
+        "format": "{{msg.label}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 510,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "0beac96a05fb8f23",
+        "type": "group",
+        "z": "b8340591.d43bf8",
+        "name": "",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true
+        },
+        "nodes": [
+            "cc41b109a53be304",
+            "a3043f1481a539f2",
+            "6bd8950b03445a24",
+            "7e80c8eff3d8cc8b",
+            "fef5240218461f62",
+            "47637e533a59b06a",
+            "ab84824b54538b5a",
+            "b89c406aaf8d92f8",
+            "96285b44d2510f02",
+            "e8a1a01ddf0a5542",
+            "831977c5ad77d423",
+            "e0685e8f1bfea4e2",
+            "a0b48b40767d321d",
+            "534bf1473a9d8600",
+            "388c6a97535e6f37"
+        ],
+        "x": 634,
+        "y": 39,
+        "w": 792,
+        "h": 462
+    },
+    {
+        "id": "cc41b109a53be304",
+        "type": "comment",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "Validate  Sensors  JSON string",
+        "info": "JSON node can validate input JSON string using [JSON schema](https://json-schema.org/) when converting to JavaScript object.",
+        "x": 800,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a3043f1481a539f2",
+        "type": "json",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "jsonConv",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 900,
+        "y": 80,
+        "wires": [
+            [
+                "6bd8950b03445a24",
+                "ab84824b54538b5a"
+            ]
+        ]
+    },
+    {
+        "id": "6bd8950b03445a24",
+        "type": "function",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "create tele msg",
+        "func": "var str = msg.topic;\nvar array = str.split('/')\nvar myDevice = array[1];\n\nif (!flow.get(\"tasmota_devices\")) {\n    flow.set(\"tasmota_devices\", new Set());\n}\nflow.get(\"tasmota_devices\").add(myDevice);\n\nvar sensorData = {\n    device: myDevice,\n    Time:msg.payload.Time,\n    event: 'tele',\n    Analog: msg.payload.ANALOG.A0,\n    Temperature: msg.payload.DHT11.Temperature,\n    Humodity: msg.payload.DHT11.Humidity,\n    DewPoint: msg.payload.DHT11.DewPoint\n}\nmsg.payload = sensorData;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 80,
+        "wires": [
+            [
+                "47637e533a59b06a",
+                "b89c406aaf8d92f8"
+            ]
+        ]
+    },
+    {
+        "id": "7e80c8eff3d8cc8b",
+        "type": "mqtt in",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "ESP82-06",
+        "topic": "ossuser1/ESP82-06/tele/SENSOR",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "6e117ba5.8026e4",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 720,
+        "y": 80,
+        "wires": [
+            [
+                "a3043f1481a539f2"
+            ]
+        ]
+    },
+    {
+        "id": "fef5240218461f62",
+        "type": "debug",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "energy tele",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "47637e533a59b06a",
+        "type": "influxdb out",
+        "z": "b8340591.d43bf8",
+        "d": true,
+        "g": "0beac96a05fb8f23",
+        "influxdb": "b9a5009ab2f652f5",
+        "name": "energyTele",
+        "measurement": "energyTele",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1310,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ab84824b54538b5a",
+        "type": "function",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "function 2",
+        "func": "var str = msg.topic;\nvar array = str.split('/');\n//var myDevice = array[1];\n//msg0 = {payload: msg.payload.comment.user.login };\nvar msg1 = {payload: array[1]};\nvar msg2 = {payload: msg.payload.Time};\nvar msg3 = {payload: msg.payload.ANALOG.A0};\nvar msg4 = {payload: msg.payload.DHT11.Temperature};\nvar msg5 = {payload: msg.payload.DHT11.Humidity};\nvar msg6 = {payload: msg.payload.DHT11.DewPoint};\nvar msg7 = {payload: msg.payload.TempUnit};\nreturn [msg1,msg2,msg3,msg4,msg5,msg6,msg7];\n//return [msg1,msg2,msg3,msg4,msg5];",
+        "outputs": 7,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 240,
+        "wires": [
+            [
+                "fef5240218461f62",
+                "831977c5ad77d423"
+            ],
+            [
+                "fef5240218461f62",
+                "e0685e8f1bfea4e2"
+            ],
+            [
+                "fef5240218461f62",
+                "a0b48b40767d321d"
+            ],
+            [
+                "fef5240218461f62",
+                "388c6a97535e6f37"
+            ],
+            [
+                "fef5240218461f62",
+                "96285b44d2510f02"
+            ],
+            [
+                "fef5240218461f62",
+                "e8a1a01ddf0a5542"
+            ],
+            [
+                "fef5240218461f62",
+                "534bf1473a9d8600"
+            ]
+        ]
+    },
+    {
+        "id": "b89c406aaf8d92f8",
+        "type": "debug",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "energy tele",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1310,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "96285b44d2510f02",
+        "type": "ui_gauge",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "80",
+        "className": "",
+        "x": 1100,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e8a1a01ddf0a5542",
+        "type": "ui_numeric",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "",
+        "label": "Dewpoint",
+        "tooltip": "",
+        "group": "afbc3cd5.d1188",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 1100,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "831977c5ad77d423",
+        "type": "ui_text",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "group": "afbc3cd5.d1188",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sation ID",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "e0685e8f1bfea4e2",
+        "type": "ui_text",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "group": "afbc3cd5.d1188",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Time",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1090,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a0b48b40767d321d",
+        "type": "ui_gauge",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "ANALOG",
+        "label": "/1000",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1100,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "534bf1473a9d8600",
+        "type": "ui_text",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "group": "afbc3cd5.d1188",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Unit",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1090,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "388c6a97535e6f37",
+        "type": "ui_gauge",
+        "z": "b8340591.d43bf8",
+        "g": "0beac96a05fb8f23",
+        "name": "",
+        "group": "afbc3cd5.d1188",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "className": "",
+        "x": 1110,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b9a5009ab2f652f5",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "house",
+        "name": "InfluxDB House",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    }
+]
