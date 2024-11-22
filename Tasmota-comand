@@ -1,0 +1,7 @@
+# Tasmota commanline
+Ledstatus 6
+# WebTime	<start_pos>,<end_pos> = show part of date and/or time in WebUI based on "2017-03-07T11:08:02-07:00"
+WebTime 0,19
+
+# https://tasmotatimezone.com/
+Backlog Latitude 12.845544501934292; Longitude 100.61195965769616; TimeZone +07:00
