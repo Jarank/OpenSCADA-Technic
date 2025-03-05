@@ -1,0 +1,245 @@
+[
+    {
+        "id": "808e5606a4e1d412",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "functionLogic",
+        "type": "function",
+        "z": "808e5606a4e1d412",
+        "name": "Motor and Sensor Logic",
+        "func": "// รับค่าชั้นปัจจุบันและชั้นเป้าหมาย\nlet currentFloor = flow.get('currentFloor') || 1;\nlet targetFloor = parseInt(msg.payload);\nlet motorStatus = \"OFF\";\nlet notification = \"\";\n\nif (currentFloor === targetFloor) {\n    // หากลิฟต์อยู่ที่ชั้นเป้าหมายแล้ว\n    notification = `Lift is already at Floor ${currentFloor}`;\n    motorStatus = \"OFF\";\n} else if (currentFloor < targetFloor) {\n    // ลิฟต์เคลื่อนที่ขึ้น\n    notification = `Lift moving UP to Floor ${targetFloor}`;\n    motorStatus = \"UP\";\n    flow.set('currentFloor', targetFloor); // อัปเดตชั้นปัจจุบัน\n} else if (currentFloor > targetFloor) {\n    // ลิฟต์เคลื่อนที่ลง\n    notification = `Lift moving DOWN to Floor ${targetFloor}`;\n    motorStatus = \"DOWN\";\n    flow.set('currentFloor', targetFloor); // อัปเดตชั้นปัจจุบัน\n}\n\n// บันทึกสถานะมอเตอร์ลงใน flow\nflow.set('motorStatus', motorStatus);\n\n// ส่งข้อความแจ้งเตือน\nnode.send({ topic: \"notification\", payload: notification });\nnode.send({ topic: \"audio\", payload: `Lift arrived at Floor ${targetFloor}` });\n\nreturn { payload: notification };",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "displayFloor",
+                "displayMotor",
+                "audioNotification"
+            ]
+        ]
+    },
+    {
+        "id": "buttonFloor1",
+        "type": "ui_button",
+        "z": "808e5606a4e1d412",
+        "name": "Call Floor 1",
+        "group": "ui_group",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Call Floor 1",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "functionLogic"
+            ]
+        ]
+    },
+    {
+        "id": "buttonFloor2",
+        "type": "ui_button",
+        "z": "808e5606a4e1d412",
+        "name": "Call Floor 2",
+        "group": "ui_group",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Call Floor 2",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "2",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "functionLogic"
+            ]
+        ]
+    },
+    {
+        "id": "buttonFloor3",
+        "type": "ui_button",
+        "z": "808e5606a4e1d412",
+        "name": "Call Floor 3",
+        "group": "ui_group",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Call Floor 3",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "3",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "functionLogic"
+            ]
+        ]
+    },
+    {
+        "id": "buttonFloor4",
+        "type": "ui_button",
+        "z": "808e5606a4e1d412",
+        "name": "Call Floor 4",
+        "group": "ui_group",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Call Floor 4",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "4",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "functionLogic"
+            ]
+        ]
+    },
+    {
+        "id": "buttonFloor5",
+        "type": "ui_button",
+        "z": "808e5606a4e1d412",
+        "name": "Call Floor 5",
+        "group": "ui_group",
+        "order": 5,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Call Floor 5",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "5",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "functionLogic"
+            ]
+        ]
+    },
+    {
+        "id": "displayFloor",
+        "type": "ui_text",
+        "z": "808e5606a4e1d412",
+        "group": "ui_group",
+        "order": 6,
+        "width": 4,
+        "height": 1,
+        "name": "Display Floor",
+        "label": "Current Floor:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "displayMotor",
+        "type": "ui_text",
+        "z": "808e5606a4e1d412",
+        "group": "ui_group",
+        "order": 7,
+        "width": 4,
+        "height": 1,
+        "name": "Display Motor Status",
+        "label": "Motor Status:",
+        "format": "{{flow.get('motorStatus')}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 640,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "audioNotification",
+        "type": "ui_audio",
+        "z": "808e5606a4e1d412",
+        "name": "Audio Notification",
+        "group": "ui_group",
+        "voice": "Google US English",
+        "always": true,
+        "x": 630,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ui_group",
+        "type": "ui_group",
+        "name": "Lift Dashboard",
+        "tab": "ui_tab",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui_tab",
+        "type": "ui_tab",
+        "name": "Lift Control",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
